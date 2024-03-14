@@ -2,6 +2,7 @@
   "expo": {
     "name": "ai-user-interface",
     "slug": "ai-user-interface",
+    "scheme": "ai-user-interface",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,6 +26,9 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
