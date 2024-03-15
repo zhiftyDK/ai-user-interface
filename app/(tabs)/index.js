@@ -1,12 +1,21 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
-const HomePage = ({
-    params,
-}) => (
-    <View>
-        <Text>HomePage</Text>
-    </View>
-);
+const HomePage = () => {
+    return (
+        <View style={styles.container}>
+            <Text style={{color: "#fff", fontFamily: "Orbitron_400Regular"}}>HomePage</Text>
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#323440",
+    },
+});
 
 export default HomePage;

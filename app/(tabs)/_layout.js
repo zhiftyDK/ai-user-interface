@@ -1,31 +1,42 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFonts, Orbitron_400Regular } from '@expo-google-fonts/orbitron';
 
 export default function TabLayout() {
-  return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: 'darkblue' }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <MaterialCommunityIcons size={24} name="home" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="calendar"
-        options={{
-          title: 'Calendar',
-          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="calendar" size={24} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="settings"
-        options={{
-          title: `Settings`,
-          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="cog" size={24} color={color} />,
-        }}
-      />
-    </Tabs>
-  );
+    const [name, setName] = useState("Home");
+    
+    useEffect(() => {
+        (async () => {
+            const item = await AsyncStorage.getItem("settings-name");
+            setName((item ? item : "Home"));
+        })();
+    }, []);
+
+    return (
+        <Tabs screenOptions={{ tabBarActiveTintColor: '#fff', tabBarStyle: {backgroundColor: "#262833"}, headerStyle: {backgroundColor: "#262833"}, headerTitleStyle: {color: "#fff", fontFamily: "Orbitron_400Regular"}}}>
+        <Tabs.Screen
+            name="index"
+            options={{
+                title: `${name}`,
+                tabBarIcon: ({ color }) => <MaterialCommunityIcons name="home" size={24} color={color} />,
+            }}
+        />
+        <Tabs.Screen
+            name="calendar"
+            options={{
+                title: 'Calendar',
+                tabBarIcon: ({ color }) => <MaterialCommunityIcons name="calendar" size={24} color={color} />,
+            }}
+        />
+        <Tabs.Screen
+            name="settings"
+            options={{
+                title: `Settings`,
+                tabBarIcon: ({ color }) => <MaterialCommunityIcons name="cog" size={24} color={color} />,
+            }}
+        />
+        </Tabs>
+    );
 }
